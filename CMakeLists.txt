@@ -11,6 +11,7 @@ include_directories(BUB/include)
 
 add_library(
         bub STATIC
+        BUB/include/BUB/TypeDisplayer.hpp
         BUB/include/BUB/Vector2.hpp
         BUB/src/BUB/Dummy.cpp BUB/include/BUB/Dummy.hpp
 )
