@@ -12,6 +12,8 @@
 namespace bub {
     template<typename T>
     struct Vector2 {
+        typedef T Type;
+
         T x;
         T y;
 

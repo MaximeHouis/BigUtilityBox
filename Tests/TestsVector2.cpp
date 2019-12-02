@@ -14,26 +14,43 @@
 #include "BUB/Vector2.hpp"
 #include "BUB/Profiler.hpp"
 
-Test(Vector2, Construct)
+#define DP_INTEGERS DataPoints(   \
+                    Vector2i::Type, std::numeric_limits<Vector2i::Type>::min(), -128, -10, -1, -0, 0, 1, 10, 128, \
+                    std::numeric_limits<Vector2i::Type>::max())
+
+using namespace bub;
+
+TheoryDataPoints(Vector2, Vector2iCtor) = {
+        DP_INTEGERS,
+        DP_INTEGERS,
+};
+
+Theory((Vector2i::Type x, Vector2i::Type y), Vector2, Vector2iCtor)
 {
-    bub::Vector2i vec;
+    Vector2i vec{x, y};
+
+    cr_assert(vec.x == x);
+    cr_assert(vec.y == y);
+}
+
+Test(Vector2, Vector2iEmpty)
+{
+    Vector2i vec;
 
     cr_assert(vec.x == 0 && vec.y == 0);
 }
 
 Test(Vector2, ConstructAtomic)
 {
-    bub::Vector2<std::atomic<int>> vec;
+    Vector2<std::atomic<uint64_t>> vec;
 
     cr_assert(vec.x == 0 && vec.y == 0);
 }
 
 Test(Vector2, Cast)
 {
-    bub::Profiler prof{"Vec2 Cast"};
-
-    bub::Vector2f v{5.5, 3.2};
-    bub::Vector2i u{v};
+    Vector2f v{5.5, 3.2};
+    Vector2i u{v};
 
     cr_assert(u.x == 5);
     cr_assert(u.y == 3);
