@@ -9,8 +9,10 @@
 #include <criterion/theories.h>
 
 #include <atomic>
+#include <thread>
 
 #include "BUB/Vector2.hpp"
+#include "BUB/Profiler.hpp"
 
 Test(Vector2, Construct)
 {
@@ -28,6 +30,8 @@ Test(Vector2, ConstructAtomic)
 
 Test(Vector2, Cast)
 {
+    bub::Profiler prof{"Vec2 Cast"};
+
     bub::Vector2f v{5.5, 3.2};
     bub::Vector2i u{v};
 
