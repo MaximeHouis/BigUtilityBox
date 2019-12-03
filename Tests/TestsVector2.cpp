@@ -27,31 +27,32 @@ TheoryDataPoints(Vector2, Vector2iCtor) = {
 
 Theory((Vector2i::ValueType x, Vector2i::ValueType y), Vector2, Vector2iCtor)
 {
-    Vector2i vec{x, y};
+    const Vector2i vec{x, y};
 
     cr_assert(vec.x == x);
     cr_assert(vec.y == y);
 }
 
-Test(Vector2, Vector2iEmpty)
+Test(Vector2, CastFloatToInt)
 {
-    Vector2i vec;
-
-    cr_assert(vec.x == 0 && vec.y == 0);
-}
-
-Test(Vector2, ConstructAtomic)
-{
-    Vector2<std::atomic<uint64_t>> vec;
-
-    cr_assert(vec.x == 0 && vec.y == 0);
-}
-
-Test(Vector2, Cast)
-{
-    Vector2f v{5.5, 3.2};
-    Vector2i u{v};
+    const Vector2f v{5.5, 3.2};
+    const Vector2i u{v};
 
     cr_assert(u.x == 5);
     cr_assert(u.y == 3);
+}
+
+Test(Vector2, Normalization)
+{
+    const Vector2f v1{5.5, 4.2};
+    const Vector2i v2{5, 4};
+    const Vector2i v3{3, 4};
+    const Vector2i v4{8, 4};
+
+    const auto v1dist = v1.normalize();
+
+    cr_assert(v1dist < 7 && v1dist > 6.9);
+    cr_assert(v2.normalize() == 6);
+    cr_assert(v3.normalize() == 5);
+    cr_assert(v4.normalize() == 9);
 }

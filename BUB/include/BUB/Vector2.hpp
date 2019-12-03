@@ -7,8 +7,9 @@
 
 #pragma once
 
-#include <cmath>
 #include <cstdint>
+#include <cmath>
+#include <iostream>
 
 namespace bub {
     template<typename T>
@@ -38,7 +39,10 @@ namespace bub {
 
         T normalize() const noexcept
         {
-            return static_cast<T>(std::sqrt(x * x + y * y));
+            if constexpr (std::is_floating_point<T>())
+                return static_cast<T>(std::sqrt(x * x + y * y));
+            else
+                return static_cast<T>(std::round(std::sqrt(x * x + y * y)));
         }
 
         bool operator==(const Vector2 &rhs) const noexcept
@@ -157,10 +161,10 @@ namespace bub {
         }
     };
 
-    using Vector2f = Vector2<float>;
-    using Vector2d = Vector2<double>;
-    using Vector2i = Vector2<int32_t>;
-    using Vector2u = Vector2<uint32_t>;
-    using Vector2l = Vector2<int64_t>;
-    using Vector2ul = Vector2<uint64_t>;
+    typedef Vector2<float> Vector2f;
+    typedef Vector2<double> Vector2d;
+    typedef Vector2<int32_t> Vector2i;
+    typedef Vector2<uint32_t> Vector2u;
+    typedef Vector2<int64_t> Vector2l;
+    typedef Vector2<uint64_t> Vector2ul;
 }
