@@ -16,33 +16,10 @@
 
 #define DP_INTEGERS DataPoints(Vector2i::ValueType, std::numeric_limits<Vector2i::ValueType>::min(), -128, -10, -1, -0, 0, 1, 10, 128, std::numeric_limits<Vector2i::ValueType>::max())
 
-#define DP_SCALAR_VEC DataPoints(Vector2f, Vector2f{-4, 5}, Vector2f{0, 9}, Vector2f{3, 0}, Vector2f{6, 7}, Vector2f{-6, 11}, Vector2f{-6, -3}, Vector2f{5, -5})
-#define DP_SCALAR_NBR DataPoints(Vector2f::ValueType, -10, -2, -1, 0, 1, 2, 10)
+#define DP_VECTORS DataPoints(Vector2f, Vector2f{-4, 5}, Vector2f{0, 9}, Vector2f{3, 0}, Vector2f{6, 7}, Vector2f{-6, 11}, Vector2f{-6, -3}, Vector2f{5, -5})
+#define DP_OPERANDS DataPoints(Vector2f::ValueType, -100, -33, -10, -9, -2, -1, 0, 1, 2, 5, 7, 11, 26, 33)
 
 using namespace bub;
-
-TheoryDataPoints(Vector2, Vector2iCtor) = {
-        DP_INTEGERS,
-        DP_INTEGERS,
-};
-
-TheoryDataPoints(Vector2, VectorScalarMul) = {
-        DP_SCALAR_VEC,
-        DP_SCALAR_NBR
-};
-
-TheoryDataPoints(Vector2, VectorScalarDiv) = {
-        DP_SCALAR_VEC,
-        DP_SCALAR_NBR
-};
-
-Theory((Vector2i::ValueType x, Vector2i::ValueType y), Vector2, Vector2iCtor)
-{
-    const Vector2i vec{x, y};
-
-    cr_assert(vec.x == x);
-    cr_assert(vec.y == y);
-}
 
 Test(Vector2, CastFloatToInt)
 {
@@ -68,6 +45,53 @@ Test(Vector2, Normalization)
     cr_assert(v4.normalize() == 9);
 }
 
+TheoryDataPoints(Vector2, Vector2iCtor) = {
+        DP_INTEGERS,
+        DP_INTEGERS,
+};
+
+TheoryDataPoints(Vector2, VectorScalarMul) = {
+        DP_VECTORS,
+        DP_OPERANDS
+};
+
+TheoryDataPoints(Vector2, VectorScalarDiv) = {
+        DP_VECTORS,
+        DP_OPERANDS
+};
+
+TheoryDataPoints(Vector2, VectorOpAdd) = {
+        DP_VECTORS,
+        DP_OPERANDS,
+        DP_OPERANDS,
+};
+
+TheoryDataPoints(Vector2, VectorOpSub) = {
+        DP_VECTORS,
+        DP_OPERANDS,
+        DP_OPERANDS,
+};
+
+TheoryDataPoints(Vector2, VectorOpMul) = {
+        DP_VECTORS,
+        DP_OPERANDS,
+        DP_OPERANDS,
+};
+
+TheoryDataPoints(Vector2, VectorOpDiv) = {
+        DP_VECTORS,
+        DP_OPERANDS,
+        DP_OPERANDS,
+};
+
+Theory((Vector2i::ValueType x, Vector2i::ValueType y), Vector2, Vector2iCtor)
+{
+    const Vector2i vec{x, y};
+
+    cr_assert(vec.x == x);
+    cr_assert(vec.y == y);
+}
+
 Theory((Vector2f vec, Vector2f::ValueType val), Vector2, VectorScalarMul)
 {
     const auto result = vec * val;
@@ -84,4 +108,38 @@ Theory((Vector2f vec, Vector2f::ValueType val), Vector2, VectorScalarDiv)
 
     cr_assert(result.x == vec.x / val);
     cr_assert(result.y == vec.y / val);
+}
+
+Theory((Vector2f vec, Vector2f::ValueType x, Vector2f::ValueType y), Vector2, VectorOpAdd)
+{
+    const auto result = vec + Vector2f{x, y};
+
+    cr_assert(result.x == vec.x + x);
+    cr_assert(result.y == vec.y + y);
+}
+
+Theory((Vector2f vec, Vector2f::ValueType x, Vector2f::ValueType y), Vector2, VectorOpSub)
+{
+    const auto result = vec - Vector2f{x, y};
+
+    cr_assert(result.x == vec.x - x);
+    cr_assert(result.y == vec.y - y);
+}
+
+Theory((Vector2f vec, Vector2f::ValueType x, Vector2f::ValueType y), Vector2, VectorOpMul)
+{
+    const auto result = vec * Vector2f{x, y};
+
+    cr_assert(result.x == vec.x * x);
+    cr_assert(result.y == vec.y * y);
+}
+
+Theory((Vector2f vec, Vector2f::ValueType x, Vector2f::ValueType y), Vector2, VectorOpDiv)
+{
+    cr_assume(y != 0);
+
+    const auto result = vec / Vector2f{x, y};
+
+    cr_assert(result.x == vec.x / x);
+    cr_assert(result.y == vec.y / y);
 }
