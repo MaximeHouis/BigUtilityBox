@@ -9,7 +9,6 @@
 
 #include <cstdint>
 #include <cmath>
-#include <iostream>
 
 namespace bub {
     template<typename T>
