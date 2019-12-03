@@ -8,7 +8,6 @@
 #include <criterion/criterion.h>
 #include <criterion/theories.h>
 
-#include <atomic>
 #include <thread>
 
 #include "BUB/Vector2.hpp"
