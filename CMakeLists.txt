@@ -12,6 +12,7 @@ include_directories(BUB/include)
 add_library(
         bub STATIC
         BUB/include/BUB/Vector2.hpp
+        BUB/include/BUB/Vector3.hpp
         BUB/include/BUB/TypeDisplayer.hpp
         BUB/src/BUB/Profiler.cpp BUB/include/BUB/Profiler.hpp
 )
@@ -19,6 +20,7 @@ add_library(
 add_executable(
         unit_tests
         Tests/TestsVector2.cpp
+        Tests/TestsVector3.cpp
 )
 
 target_link_libraries(unit_tests bub criterion)

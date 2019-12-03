@@ -136,6 +136,7 @@ Theory((Vector2f vec, Vector2f::ValueType x, Vector2f::ValueType y), Vector2, Ve
 
 Theory((Vector2f vec, Vector2f::ValueType x, Vector2f::ValueType y), Vector2, VectorOpDiv)
 {
+    cr_assume(x != 0);
     cr_assume(y != 0);
 
     const auto result = vec / Vector2f{x, y};
