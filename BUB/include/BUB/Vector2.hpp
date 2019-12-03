@@ -108,16 +108,6 @@ namespace bub {
             return *this;
         }
 
-        VecType operator+(T val) const noexcept
-        {
-            return VecType{x + val, y + val};
-        }
-
-        VecType operator-(T val) const noexcept
-        {
-            return VecType{x - val, y - val};
-        }
-
         VecType operator*(T val) const noexcept
         {
             return VecType{x * val, y * val};
@@ -126,22 +116,6 @@ namespace bub {
         VecType operator/(T val) const noexcept
         {
             return VecType{x / val, y / val};
-        }
-
-        VecType &operator+=(T val) noexcept
-        {
-            x += val;
-            y += val;
-
-            return *this;
-        }
-
-        VecType &operator-=(T val) noexcept
-        {
-            x -= val;
-            y -= val;
-
-            return *this;
         }
 
         VecType &operator*=(T val) noexcept
