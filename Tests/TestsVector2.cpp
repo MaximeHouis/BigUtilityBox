@@ -15,8 +15,8 @@
 #include "BUB/Profiler.hpp"
 
 #define DP_INTEGERS DataPoints(   \
-                    Vector2i::Type, std::numeric_limits<Vector2i::Type>::min(), -128, -10, -1, -0, 0, 1, 10, 128, \
-                    std::numeric_limits<Vector2i::Type>::max())
+                    Vector2i::ValueType, std::numeric_limits<Vector2i::ValueType>::min(), \
+                    -128, -10, -1, -0, 0, 1, 10, 128, std::numeric_limits<Vector2i::ValueType>::max())
 
 using namespace bub;
 
@@ -25,7 +25,7 @@ TheoryDataPoints(Vector2, Vector2iCtor) = {
         DP_INTEGERS,
 };
 
-Theory((Vector2i::Type x, Vector2i::Type y), Vector2, Vector2iCtor)
+Theory((Vector2i::ValueType x, Vector2i::ValueType y), Vector2, Vector2iCtor)
 {
     Vector2i vec{x, y};
 

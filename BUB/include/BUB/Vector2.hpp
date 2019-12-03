@@ -7,12 +7,14 @@
 
 #pragma once
 
+#include <cmath>
 #include <cstdint>
 
 namespace bub {
     template<typename T>
     struct Vector2 {
-        typedef T Type;
+        typedef T ValueType;
+        typedef Vector2<T> VecType;
 
         T x;
         T y;
@@ -34,6 +36,11 @@ namespace bub {
 
         ~Vector2() = default;
 
+        T normalize() const noexcept
+        {
+            return static_cast<T>(std::sqrt(x * x + y * y));
+        }
+
         bool operator==(const Vector2 &rhs) const noexcept
         {
             return x == rhs.x &&
@@ -45,6 +52,109 @@ namespace bub {
             return !(rhs == *this);
         }
 
+        VecType operator+(const VecType &rhs) const noexcept
+        {
+            return VecType{x + rhs.x, y + rhs.y};
+        }
+
+        VecType operator-(const VecType &rhs) const noexcept
+        {
+            return VecType{x - rhs.x, y - rhs.y};
+        }
+
+        VecType operator*(const VecType &rhs) const noexcept
+        {
+            return VecType{x * rhs.x, y * rhs.y};
+        }
+
+        VecType operator/(const VecType &rhs) const noexcept
+        {
+            return VecType{x / rhs.x, y / rhs.y};
+        }
+
+        VecType &operator+=(const VecType &rhs) noexcept
+        {
+            x += rhs.x;
+            y += rhs.y;
+
+            return *this;
+        }
+
+        VecType &operator-=(const VecType &rhs) noexcept
+        {
+            x -= rhs.x;
+            y -= rhs.y;
+
+            return *this;
+        }
+
+        VecType &operator*=(const VecType &rhs) noexcept
+        {
+            x *= rhs.x;
+            y *= rhs.y;
+
+            return *this;
+        }
+
+        VecType &operator/=(const VecType &rhs) noexcept
+        {
+            x /= rhs.x;
+            y /= rhs.y;
+
+            return *this;
+        }
+
+        VecType operator+(T val) const noexcept
+        {
+            return VecType{x + val, y + val};
+        }
+
+        VecType operator-(T val) const noexcept
+        {
+            return VecType{x - val, y - val};
+        }
+
+        VecType operator*(T val) const noexcept
+        {
+            return VecType{x * val, y * val};
+        }
+
+        VecType operator/(T val) const noexcept
+        {
+            return VecType{x / val, y / val};
+        }
+
+        VecType &operator+=(T val) noexcept
+        {
+            x += val;
+            y += val;
+
+            return *this;
+        }
+
+        VecType &operator-=(T val) noexcept
+        {
+            x -= val;
+            y -= val;
+
+            return *this;
+        }
+
+        VecType &operator*=(T val) noexcept
+        {
+            x *= val;
+            y *= val;
+
+            return *this;
+        }
+
+        VecType &operator/=(T val) noexcept
+        {
+            x /= val;
+            y /= val;
+
+            return *this;
+        }
     };
 
     using Vector2f = Vector2<float>;
