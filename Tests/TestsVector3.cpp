@@ -16,7 +16,7 @@
 
 #define DP_INTEGERS DataPoints(Vector3i::ValueType, std::numeric_limits<Vector3i::ValueType>::min(), -128, -10, -1, -0, 0, 1, 10, 128, std::numeric_limits<Vector3i::ValueType>::max())
 
-#define DP_VECTORS DataPoints(Vector3f, Vector3f{-4, 5, 2}, Vector3f{0, 9, -6}, Vector3f{-3, 0, 2}, Vector3f{6, -7, -2}, Vector3f{-6, 11, 44}, Vector3f{-6, -3, -12}, Vector3f{5, -5, 0})
+#define DP_VECTORS DataPoints(Vector3f, Vector3f{-4, 5, 2}, Vector3f{0, 9, -6}, Vector3f{-6, -3, -12}, Vector3f{5, -5, 0})
 #define DP_OPERANDS DataPoints(Vector3f::ValueType, -100, -9, -2, -1, 0, 1, 2, 33, 100)
 
 using namespace bub;
