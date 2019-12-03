@@ -20,6 +20,7 @@ add_library(
 add_executable(
         unit_tests
         Tests/TestsVector2.cpp
+        Tests/TestsVector3.cpp
 )
 
 target_link_libraries(unit_tests bub criterion)
