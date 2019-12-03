@@ -1,0 +1,24 @@
+name: Build & Test
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v1
+
+      - name: Fetch Criterion
+        id: fetch-criterion
+        run: sudo add-apt-repository ppa:snaipewastaken/ppa && sudo apt-get update && sudo apt-get install criterion-dev -y
+
+      - name: Configure
+        run: mkdir build && cd build && cmake ..
+
+      - name: Build
+        run: cd build && make
+
+      - name: Run tests
+        run: ./build/unit_tests --verbose -j1
