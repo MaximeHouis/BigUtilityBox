@@ -1,0 +1,28 @@
+name: C/C++ CI
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+
+    - name: Cache
+      id: cache-criterion
+      uses: actions/cache@v1.0.3
+      with:
+        path: ~/criterion-cache
+        key: criterion-cache
+      
+    - name: Fetch Criterion
+      id: fetch-criterion
+      if: steps.cache-criterion.outputs.cache-hit != 'true'
+      run: sudo add-apt-repository ppa:snaipewastaken/ppa && sudo apt-get update && sudo apt-get install criterion-dev -y
+
+    - name: Configure
+      run: mkdir build && cd build && cmake ..
+    - name: Build
+      run: make
