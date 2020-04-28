@@ -152,7 +152,7 @@ namespace bub {
 
     typedef Vector3<float> Vector3f;
     typedef Vector3<double> Vector3d;
-    typedef Vector3<long double> Vector2ld;
+    typedef Vector3<long double> Vector3ld;
     typedef Vector3<int32_t> Vector3i;
     typedef Vector3<uint32_t> Vector3u;
     typedef Vector3<int64_t> Vector3l;
