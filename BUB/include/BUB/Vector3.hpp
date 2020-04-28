@@ -20,10 +20,12 @@ namespace bub {
         T y;
         T z;
 
-        Vector3() noexcept : x{0}, y{0}, z{0}
+        Vector3() noexcept
+                : x{0}, y{0}, z{0}
         {}
 
-        Vector3(T x_, T y_, T z_) noexcept : x{x_}, y{y_}, z{z_}
+        Vector3(T x_, T y_, T z_) noexcept
+                : x{x_}, y{y_}, z{z_}
         {}
 
         template<typename U>
@@ -38,12 +40,17 @@ namespace bub {
 
         ~Vector3() = default;
 
-        T normalize() const noexcept
+        T length() const noexcept
         {
             if constexpr (std::is_floating_point<T>())
                 return static_cast<T>(std::sqrt(x * x + y * y + z * z));
             else
                 return static_cast<T>(std::round(std::sqrt(x * x + y * y + z * z)));
+        }
+
+        VecType normalize() const noexcept
+        {
+            return *this * (1.0 / length());
         }
 
         bool operator==(const Vector3 &rhs) const noexcept
@@ -145,6 +152,7 @@ namespace bub {
 
     typedef Vector3<float> Vector3f;
     typedef Vector3<double> Vector3d;
+    typedef Vector3<long double> Vector2ld;
     typedef Vector3<int32_t> Vector3i;
     typedef Vector3<uint32_t> Vector3u;
     typedef Vector3<int64_t> Vector3l;
