@@ -29,19 +29,19 @@ Test(Vector2, CastFloatToInt)
     cr_assert(u.y == 3);
 }
 
-Test(Vector2, Normalization)
+Test(Vector2, Length)
 {
     const Vector2f v1{5.5, 4.2};
     const Vector2i v2{5, 4};
     const Vector2i v3{3, 4};
     const Vector2i v4{8, 4};
 
-    const auto v1dist = v1.normalize();
+    const auto v1dist = v1.length();
 
     cr_assert(v1dist < 7 && v1dist > 6.9);
-    cr_assert(v2.normalize() == 6);
-    cr_assert(v3.normalize() == 5);
-    cr_assert(v4.normalize() == 9);
+    cr_assert(v2.length() == 6);
+    cr_assert(v3.length() == 5);
+    cr_assert(v4.length() == 9);
 }
 
 TheoryDataPoints(Vector2, Vector2iCtor) = {
