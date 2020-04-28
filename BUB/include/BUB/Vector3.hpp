@@ -1,8 +1,8 @@
 /*
-** EPITECH PROJECT, 2019
-** BigUtilityBox
-** File description:
-** Vector3.hpp
+** BigUtilityBox Copyright (C) 2020 Maxime Houis
+** This program comes with ABSOLUTELY NO WARRANTY.
+** This is free software, and you are welcome to redistribute it
+** under certain conditions; see LICENSE for details.
 */
 
 #pragma once

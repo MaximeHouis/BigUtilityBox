@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 3.12)
 project(BigUtilityBox)
 
 set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON 17)
 
 if (UNIX)
     add_compile_options(-Wall -Wextra -Weffc++)
