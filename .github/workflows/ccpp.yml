@@ -12,10 +12,16 @@ jobs:
 
       - name: Fetch Criterion
         id: fetch-criterion
-        run: sudo add-apt-repository ppa:snaipewastaken/ppa && sudo apt-get update && sudo apt-get install criterion-dev -y
+        run: |
+          sudo add-apt-repository ppa:snaipewastaken/ppa
+          sudo apt-get update
+          sudo apt-get install -y criterion-dev gcovr
 
       - name: Configure
-        run: mkdir build && cd build && cmake ..
+        run: |
+          mkdir build
+          cd build
+          cmake ..
 
       - name: Build
         run: cd build && make

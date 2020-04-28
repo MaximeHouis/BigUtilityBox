@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.12.4)
+cmake_minimum_required(VERSION 3.12)
 project(BigUtilityBox)
 
 set(CMAKE_CXX_STANDARD 17)
@@ -19,8 +19,7 @@ add_library(
 
 add_executable(
         unit_tests
-        Tests/TestsVector2.cpp
-        Tests/TestsVector3.cpp
+        UnitTests/TestsVector2.cpp
+        UnitTests/TestsVector3.cpp
 )
-
 target_link_libraries(unit_tests bub criterion)

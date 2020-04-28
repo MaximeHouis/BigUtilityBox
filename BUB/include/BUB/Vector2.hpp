@@ -19,10 +19,12 @@ namespace bub {
         T x;
         T y;
 
-        Vector2() noexcept : x{0}, y{0}
+        Vector2() noexcept
+                : x{0}, y{0}
         {}
 
-        Vector2(T x_, T y_) noexcept : x{x_}, y{y_}
+        Vector2(T x_, T y_) noexcept
+                : x{x_}, y{y_}
         {}
 
         template<typename U>
@@ -36,12 +38,17 @@ namespace bub {
 
         ~Vector2() = default;
 
-        T normalize() const noexcept
+        T length() const noexcept
         {
             if constexpr (std::is_floating_point<T>())
                 return static_cast<T>(std::sqrt(x * x + y * y));
             else
                 return static_cast<T>(std::round(std::sqrt(x * x + y * y)));
+        }
+
+        VecType normalize() const noexcept
+        {
+            return *this * (1.0 / length());
         }
 
         bool operator==(const Vector2 &rhs) const noexcept
@@ -136,6 +143,7 @@ namespace bub {
 
     typedef Vector2<float> Vector2f;
     typedef Vector2<double> Vector2d;
+    typedef Vector2<long double> Vector2ld;
     typedef Vector2<int32_t> Vector2i;
     typedef Vector2<uint32_t> Vector2u;
     typedef Vector2<int64_t> Vector2l;
